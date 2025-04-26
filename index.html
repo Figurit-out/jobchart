@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class JobChart</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#002366", secondary: "#FFB347" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      }
+      .job-card {
+      border: 2px dashed #FFB347;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      }
+      .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <header class="bg-primary text-white py-6 relative">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <img
+        src="https://static.readdy.ai/image/e7fda056f487b2eebad44b06da912ade/3e54d715a990679d0c97201e82803c65.jpeg"
+        alt="Excelsior School Logo"
+        class="h-20"
+      />
+
+      <!-- About Us Button -->
+      <a
+        href="aboutus.html"
+        class="text-white text-lg bg-secondary px-4 py-2 rounded-lg shadow hover:bg-opacity-90 transition"
+      >
+        About Us
+      </a>
+    </div>
+
+    <div class="text-center mt-6">
+      <h1 class="text-5xl font-bold mb-4">Class JobChart Grade 9</h1>
+      <p class="text-2xl">The jobchart for grade 9!</p>
+    </div>
+  </div>
+</header>
+  <main class="container mx-auto px-4 py-12 flex-grow">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-amber-500 bg-amber-100 rounded-full mr-3"
+            >
+              <i class="ri-user-star-line ri-2x"></i>
+            </div>
+            <a
+              href="Monitor.html"  class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Monitor</a
+            >
+          </div>
+          <a
+            href="Monitor.html"  class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Maintains class discipline and assists the teacher in managing
+            classroom activities.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-blue-500 bg-blue-100 rounded-full mr-3"
+            >
+              <i class="ri-flag-line ri-lg"></i>
+            </div>
+            <a
+              href="ClassAmbassador.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Class Ambassador</a
+            >
+          </div>
+          <a
+            href="ClassAmbassador.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Represents the class in school events and acts as a bridge between
+            students and teachers.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-green-500 bg-green-100 rounded-full mr-3"
+            >
+              <i class="ri-file-list-3-line ri-lg"></i>
+            </div>
+            <a
+              href="Registermanager.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Register Manager</a
+            >
+          </div>
+          <a
+            href="Registermanager.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Takes daily attendance and ensures records are updated
+            accurately.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-purple-500 bg-purple-100 rounded-full mr-3"
+            >
+              <i class="ri-palette-line ri-lg"></i>
+            </div>
+            <a
+              href="Classroomdecorator.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Classroom Decorator</a
+            >
+          </div>
+          <a
+            href="Classroomdecorator.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Designs and maintains creative displays and decorations in the
+            classroom.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-red-500 bg-red-100 rounded-full mr-3"
+            >
+              <i class="ri-book-2-line ri-lg"></i>
+            </div>
+            <a
+              href="Collector&distributor.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Notebook Collector</a
+            >
+          </div>
+          <a
+            href="Collector&distributor.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Collects and distributes notebooks and classwork efficiently.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-gray-500 bg-gray-100 rounded-full mr-3"
+            >
+              <i class="ri-computer-line ri-lg"></i>
+            </div>
+            <a
+              href="Techsupport.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Tech Support</a
+            >
+          </div>
+          <a
+            href="Techsupport.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Assists in handling classroom technology like projectors and
+            computers.</a
+          >
+        </div>
+        <div class="job-card rounded-lg p-8 bg-white">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-teal-500 bg-teal-100 rounded-full mr-3"
+            >
+              <i class="ri-hand-sanitizer-line ri-lg"></i>
+            </div>
+            <a
+              href="HygineHero.html"
+              class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+              >Hygiene Hero</a
+            >
+          </div>
+          <a
+            href="HygineHero.html"
+            class="text-gray-700 text-lg hover:text-primary transition-colors"
+            >Ensures cleanliness in the classroom and promotes hygiene practices
+            among classmates.</a>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-gray-800 text-white py-6 text-center">
+      <p class="text-lg"></p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const jobCards = document.querySelectorAll(".job-card");
+        jobCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            const link = card.querySelector('a[data-readdy="true"]');
+            if (link) {
+              window.location.href = link.href;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Monitor</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16">
+function saveResponsibilitiesToStorage() {
+  const responsibilities = [];
+  document.querySelectorAll("ul.space-y-3 li span").forEach((span) => {
+    responsibilities.push(span.textContent.trim());
+  });
+  localStorage.setItem("responsibilities", JSON.stringify(responsibilities));
+}
+
+function enableResponsibilityEditing(li) {
+  const span = li.querySelector("span");
+  const text = span.textContent.trim();
+  span.classList.add("hidden");
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.className = "w-full text-sm text-gray-700 border-none bg-gray-50 rounded p-2";
+  li.insertBefore(textarea, span);
+
+  const buttonGroup = document.createElement("div");
+  buttonGroup.className = "mt-2 flex justify-end space-x-2";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.textContent = "Save";
+  saveBtn.className = "px-3 py-1 text-sm bg-primary text-white rounded-button hover:bg-blue-600";
+  saveBtn.onclick = () => {
+    const newText = textarea.value.trim();
+    if (newText) {
+      span.textContent = newText;
+      saveResponsibilitiesToStorage();
+    }
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "px-3 py-1 text-sm border border-gray-300 rounded-button hover:bg-gray-50";
+  cancelBtn.onclick = () => {
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  buttonGroup.appendChild(saveBtn);
+  buttonGroup.appendChild(cancelBtn);
+  li.appendChild(buttonGroup);
+}
+
+function loadResponsibilitiesFromStorage() {
+  const saved = localStorage.getItem("responsibilities");
+  if (saved) {
+    const ul = document.querySelector("ul.space-y-3");
+    ul.innerHTML = "";
+    JSON.parse(saved).forEach((resp) => {
+      const li = document.createElement("li");
+      li.className = "flex items-start p-2 hover:bg-gray-50 rounded transition-colors group";
+      li.innerHTML = `
+        <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+          <i class="ri-check-line text-green-500 ri-sm"></i>
+        </div>
+        <span class="text-sm text-gray-700 flex-1">${resp}</span>
+        <button class="delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      `;
+      const editBtn = document.createElement("button");
+      editBtn.className = "edit-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity";
+      editBtn.innerHTML = '<i class="ri-edit-line"></i>';
+      editBtn.onclick = () => enableResponsibilityEditing(li);
+      li.appendChild(editBtn);
+      ul.appendChild(li);
+    });
+  }
+}
+
+</script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#3b82f6", secondary: "#64748b" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    
+function saveResponsibilitiesToStorage() {
+  const responsibilities = [];
+  document.querySelectorAll("ul.space-y-3 li span").forEach((span) => {
+    responsibilities.push(span.textContent.trim());
+  });
+  localStorage.setItem("responsibilities", JSON.stringify(responsibilities));
+}
+
+function enableResponsibilityEditing(li) {
+  const span = li.querySelector("span");
+  const text = span.textContent.trim();
+  span.classList.add("hidden");
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.className = "w-full text-sm text-gray-700 border-none bg-gray-50 rounded p-2";
+  li.insertBefore(textarea, span);
+
+  const buttonGroup = document.createElement("div");
+  buttonGroup.className = "mt-2 flex justify-end space-x-2";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.textContent = "Save";
+  saveBtn.className = "px-3 py-1 text-sm bg-primary text-white rounded-button hover:bg-blue-600";
+  saveBtn.onclick = () => {
+    const newText = textarea.value.trim();
+    if (newText) {
+      span.textContent = newText;
+      saveResponsibilitiesToStorage();
+    }
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "px-3 py-1 text-sm border border-gray-300 rounded-button hover:bg-gray-50";
+  cancelBtn.onclick = () => {
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  buttonGroup.appendChild(saveBtn);
+  buttonGroup.appendChild(cancelBtn);
+  li.appendChild(buttonGroup);
+}
+
+function loadResponsibilitiesFromStorage() {
+  const saved = localStorage.getItem("responsibilities");
+  if (saved) {
+    const ul = document.querySelector("ul.space-y-3");
+    ul.innerHTML = "";
+    JSON.parse(saved).forEach((resp) => {
+      const li = document.createElement("li");
+      li.className = "flex items-start p-2 hover:bg-gray-50 rounded transition-colors group";
+      li.innerHTML = `
+        <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+          <i class="ri-check-line text-green-500 ri-sm"></i>
+        </div>
+        <span class="text-sm text-gray-700 flex-1">${resp}</span>
+        <button class="delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      `;
+      const editBtn = document.createElement("button");
+      editBtn.className = "edit-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity";
+      editBtn.innerHTML = '<i class="ri-edit-line"></i>';
+      editBtn.onclick = () => enableResponsibilityEditing(li);
+      li.appendChild(editBtn);
+      ul.appendChild(li);
+    });
+  }
+}
+
+</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      background-color: #f9fafb;
+      }
+      input:focus {
+      outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="h-screen w-screen flex items-center justify-center">
+      <div class="bg-white w-full h-screen overflow-hidden">
+        <div class="flex flex-col md:flex-row h-full">
+          <!-- Left side - Role information -->
+          <div class="p-8 flex-1 overflow-y-auto min-w-[320px]">
+            <div
+              class="flex items-center mb-6 bg-gradient-to-r from-green-50 to-white p-4 rounded-lg border border-green-100"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4"
+              >
+                <i class="ri-user-star-line text-green-500 ri-lg"></i>
+              </div>
+              <div>
+                <h1 class="text-xl font-bold text-gray-900">Class Monitor</h1>
+                <p class="text-sm text-gray-500">Class Monitor Role</p>
+              </div>
+            </div>
+            <div class="mb-6">
+              <div class="flex justify-between items-center mb-2">
+                <h2 class="text-lg font-semibold text-gray-800">
+                  Role Description
+                </h2>
+                <button
+                  id="editDescriptionBtn"
+                  class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600"
+                >
+                  <i class="ri-edit-line"></i>
+                </button>
+              </div>
+              <div
+                class="bg-white p-4 rounded-lg border border-gray-100 shadow-sm"
+              >
+                <div
+                  id="descriptionDisplay"
+                  class="text-gray-700 text-sm leading-relaxed"
+                >
+                  The Class Monitor plays a key role in supporting classroom discipline and smooth operation. Responsibilities include helping maintain order, managing transitions between activities, assisting the teacher with routine tasks, and encouraging classmates to follow classroom rules. This role builds leadership, responsibility, and respect among peers.
+                </div>
+                <textarea
+                  id="descriptionEdit"
+                  class="hidden w-full text-sm text-gray-700 border-none bg-gray-50 rounded p-2"
+                  rows="4"
+                ></textarea>
+                <div
+                  id="descriptionButtons"
+                  class="hidden mt-3 flex justify-end space-x-2"
+                >
+                  <button
+                    class="px-3 py-1 text-sm bg-primary text-white rounded-button hover:bg-blue-600"
+                    onclick="saveDescription()"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="px-3 py-1 text-sm border border-gray-300 rounded-button hover:bg-gray-50"
+                    onclick="cancelDescriptionEdit()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold text-gray-800">
+                  Key Responsibilities
+                </h2>
+                <button
+                  id="addResponsibilityBtn"
+                  class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600"
+                >
+                  <i class="ri-add-line"></i>
+                </button>
+              </div>
+              <div
+                id="newResponsibilityForm"
+                class="hidden mb-4 bg-white p-4 rounded-lg border border-gray-100 shadow-sm"
+              >
+                <input
+                  type="text"
+                  id="newResponsibilityInput"
+                  class="w-full mb-3 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                  placeholder="Enter new responsibility"
+                />
+                <div class="flex justify-end space-x-2">
+                  <button
+                    class="px-3 py-1 text-sm bg-primary text-white rounded-button hover:bg-blue-600"
+                    onclick="saveNewResponsibility()"
+                  >
+                    Add
+                  </button>
+                  <button
+                    class="px-3 py-1 text-sm border border-gray-300 rounded-button hover:bg-gray-50"
+                    onclick="cancelNewResponsibility()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+              <ul
+                class="space-y-3 bg-white p-4 rounded-lg border border-gray-100 shadow-sm"
+              >
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors group"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700 flex-1"
+                    >Ensure students follow classroom rules and behave appropriately.</span
+                  >
+                  <button
+                    class="delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <i class="ri-delete-bin-line"></i>
+                  </button>
+                </li>
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700"
+                    >Remind calssmates to stay focused and maintain discipline.</span
+                  >
+                </li>
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700"
+                    >Report disruptive behaviour or issues to the teacher.</span
+                  >
+                </li>
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700"
+                    >Help message a quiet and productive leaning environment.</span
+                  >
+                </li>
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700"
+                    >Deliver messages or materials to other classrooms or the office.</span
+                  >
+                </li>
+                <li
+                  class="flex items-start p-2 hover:bg-gray-50 rounded transition-colors"
+                >
+                  <div
+                    class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3"
+                  >
+                    <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700"
+                    >Keep track of important announcements and reminders.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Right side - Profile upload and name -->
+          <div
+            class="bg-gray-50 p-8 md:w-96 flex flex-col items-center justify-center border-l border-gray-200 overflow-y-auto min-w-[320px]"
+          >
+            <div
+              class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 w-full"
+            >
+              <div class="w-full">
+                <h2
+                  class="text-lg font-semibold text-gray-800 mb-6 text-center"
+                >
+                  Profile Information
+                </h2>
+                <div class="mb-6">
+                  <div class="flex justify-center mb-2">
+                    <input
+                      type="file"
+                      id="photoInput"
+                      accept="image/*"
+                      class="hidden"
+                    />
+                    <div class="relative w-32 h-32">
+                      <div
+                        id="photoPreview"
+                        class="absolute inset-0 rounded-lg bg-white bg-cover bg-center"
+                      ></div>
+                      <div
+                        id="uploadPrompt"
+                        class="absolute inset-0 border-2 border-dashed border-gray-300 rounded-lg bg-white flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-colors"
+                      >
+                        <i class="ri-camera-line text-gray-400 ri-2x mb-2"></i>
+                        <span class="text-sm text-gray-500">Upload Photo</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    id="clearPhotoBtn"
+                    class="mx-auto block text-sm text-gray-500 hover:text-red-500 transition-colors"
+                  >
+                    <i class="ri-delete-bin-line mr-1"></i>Clear Photo
+                  </button>
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Full Name</label
+                  >
+                  <div class="bg-white rounded-lg shadow-sm relative">
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Enter your name (letters only)"
+                      maxlength="50"
+                      class="w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-700 text-sm focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all pr-8"
+                    />
+                    <button
+                      id="clearNameBtn"
+                      class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 w-6 h-6 flex items-center justify-center"
+                    >
+                      <i class="ri-close-line"></i>
+                    </button>
+                  </div>
+                  <p id="nameError" class="hidden text-red-500 text-xs mt-1">
+                    Please enter your full name
+                  </p>
+                </div>
+                <div class="flex flex-col space-y-3">
+                  <div class="flex space-x-3">
+                    <button
+                      id="saveBtn"
+                      class="flex-1 bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-blue-600 transition-colors whitespace-nowrap"
+                    >
+                      Save
+                    </button>
+                    <button
+                      id="cancelBtn"
+                      class="flex-1 bg-white text-gray-700 py-2 px-4 border border-gray-300 rounded-button text-sm font-medium hover:bg-gray-50 transition-colors whitespace-nowrap"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <a
+                    href="index.html"
+                    class="w-full bg-gray-800 text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-gray-700 transition-colors text-center whitespace-nowrap"
+                  >
+                    <i class="ri-arrow-left-line mr-2"></i>Back to Home
+                  </a>
+                </div>
+                <div
+                  id="successToast"
+                  class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded shadow-lg transform transition-transform duration-300 translate-x-full"
+                >
+                  Profile updated successfully!
+                </div>
+                <script>
+                  let originalDescription = "";
+                  function editDescription() {
+                    const displayEl = document.getElementById("descriptionDisplay");
+                    const editEl = document.getElementById("descriptionEdit");
+                    const buttonsEl = document.getElementById("descriptionButtons");
+                    originalDescription = displayEl.textContent.trim();
+                    editEl.value = originalDescription;
+                    displayEl.classList.add("hidden");
+                    editEl.classList.remove("hidden");
+                    buttonsEl.classList.remove("hidden");
+                  }
+                  function saveDescription() {
+                    const displayEl = document.getElementById("descriptionDisplay");
+                    const editEl = document.getElementById("descriptionEdit");
+                    const buttonsEl = document.getElementById("descriptionButtons");
+                    const newDescription = editEl.value.trim();
+                    if (newDescription) {
+                      displayEl.textContent = newDescription;
+                    }
+                    displayEl.classList.remove("hidden");
+                    editEl.classList.add("hidden");
+                    buttonsEl.classList.add("hidden");
+                  }
+                  function cancelDescriptionEdit() {
+                    const displayEl = document.getElementById("descriptionDisplay");
+                    const editEl = document.getElementById("descriptionEdit");
+                    const buttonsEl = document.getElementById("descriptionButtons");
+                    displayEl.classList.remove("hidden");
+                    editEl.classList.add("hidden");
+                    buttonsEl.classList.add("hidden");
+                  }
+                  function showNewResponsibilityForm() {
+                    document.getElementById("newResponsibilityForm").classList.remove("hidden");
+                    document.getElementById("newResponsibilityInput").focus();
+                  }
+                  function saveNewResponsibility() {
+                    const input = document.getElementById("newResponsibilityInput");
+                    const newResp = input.value.trim();
+                    if (newResp) {
+                      const ul = document.querySelector("ul.space-y-3");
+                      const li = document.createElement("li");
+                      li.className =
+                        "flex items-start p-2 hover:bg-gray-50 rounded transition-colors group";
+                      li.innerHTML = `
+                  <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+                  <i class="ri-check-line text-green-500 ri-sm"></i>
+                  </div>
+                  <span class="text-sm text-gray-700 flex-1">${newResp}</span>
+                  <button class="delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <i class="ri-delete-bin-line"></i>
+                  </button>
+                  `;
+                      ul.appendChild(li);
+                      cancelNewResponsibility();
+                    }
+                  }
+                  function cancelNewResponsibility() {
+                    const form = document.getElementById("newResponsibilityForm");
+                    const input = document.getElementById("newResponsibilityInput");
+                    form.classList.add("hidden");
+                    input.value = "";
+                  }
+                  document.addEventListener("DOMContentLoaded", function () {
+  loadResponsibilitiesFromStorage();
+                    document
+                      .getElementById("editDescriptionBtn")
+                      .addEventListener("click", editDescription);
+                    document
+                      .getElementById("addResponsibilityBtn")
+                      .addEventListener("click", showNewResponsibilityForm);
+
+                    // Add event delegation for delete buttons
+                    document
+                      .querySelector("ul.space-y-3")
+                      .addEventListener("click", function (e) {
+                        if (e.target.closest(".delete-responsibility")) {
+                          const li = e.target.closest("li");
+                          li.remove();
+      saveResponsibilitiesToStorage();
+                        }
+                      });
+
+                    // Convert existing responsibility items to have delete buttons
+                    document.querySelectorAll("ul.space-y-3 li").forEach((li) => {
+                      if (!li.querySelector(".delete-responsibility")) {
+                        li.classList.add("group");
+                        const span = li.querySelector("span");
+                        span.classList.add("flex-1");
+                        const deleteBtn = document.createElement("button");
+                        deleteBtn.className =
+                          "delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity";
+                        deleteBtn.innerHTML = '<i class="ri-delete-bin-line"></i>';
+                        li.appendChild(deleteBtn);
+                      }
+                    });
+                    const photoInput = document.getElementById("photoInput");
+                    const uploadPrompt = document.getElementById("uploadPrompt");
+                    const photoPreview = document.getElementById("photoPreview");
+                    const clearPhotoBtn = document.getElementById("clearPhotoBtn");
+                    const nameInput = document.getElementById("name");
+                    const nameError = document.getElementById("nameError");
+                    const saveBtn = document.getElementById("saveBtn");
+                    const cancelBtn = document.getElementById("cancelBtn");
+                    const successToast = document.getElementById("successToast");
+                    let originalName = localStorage.getItem("monitorName") || "";
+                    let originalPhoto = localStorage.getItem("monitorPhoto") || "";
+                    if (originalName) {
+                      nameInput.value = originalName;
+                    }
+                    if (originalPhoto) {
+                      photoPreview.style.backgroundImage = originalPhoto;
+                      uploadPrompt.style.opacity = "0";
+                    }
+                    uploadPrompt.addEventListener("click", () => {
+                      photoInput.click();
+                    });
+                    photoInput.addEventListener("change", (e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                          photoPreview.style.backgroundImage = `url(${e.target.result})`;
+                          uploadPrompt.style.opacity = "0";
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    });
+                    saveBtn.addEventListener("click", () => {
+                      const name = nameInput.value.trim();
+                      if (name === "" || !/^[a-zA-Z\s]{2,50}$/.test(name)) {
+                        nameError.textContent =
+                          name === ""
+                            ? "Please enter your full name"
+                            : "Please enter a valid name (2-50 letters only)";
+                        nameError.classList.remove("hidden");
+                        nameInput.classList.add("border-red-500");
+                        return;
+                      }
+                      originalName = name;
+                      originalPhoto = photoPreview.style.backgroundImage;
+                      localStorage.setItem("monitorName", originalName);
+                      localStorage.setItem("monitorPhoto", originalPhoto);
+                      nameError.classList.add("hidden");
+                      nameInput.classList.remove("border-red-500");
+                      successToast.style.transform = "translateX(0)";
+                      setTimeout(() => {
+                        successToast.style.transform = "translateX(100%)";
+                      }, 3000);
+                    });
+                    cancelBtn.addEventListener("click", () => {
+                      nameInput.value = originalName;
+                      photoPreview.style.backgroundImage = originalPhoto;
+                      if (originalPhoto === "") {
+                        uploadPrompt.style.opacity = "1";
+                      }
+                      nameError.classList.add("hidden");
+                      nameInput.classList.remove("border-red-500");
+                    });
+                    nameInput.addEventListener("input", () => {
+                      const name = nameInput.value.trim();
+                      if (name === "" || !/^[a-zA-Z\s]{0,50}$/.test(name)) {
+                        nameError.textContent =
+                          name === ""
+                            ? "Please enter your full name"
+                            : "Please enter a valid name (letters only)";
+                        nameError.classList.remove("hidden");
+                        nameInput.classList.add("border-red-500");
+                      } else {
+                        nameError.classList.add("hidden");
+                        nameInput.classList.remove("border-red-500");
+                      }
+                    });
+                    clearPhotoBtn.addEventListener("click", () => {
+                      photoPreview.style.backgroundImage = "";
+                      uploadPrompt.style.opacity = "1";
+                      localStorage.removeItem("monitorPhoto");
+                      originalPhoto = "";
+                    });
+                    const clearNameBtn = document.getElementById("clearNameBtn");
+                    clearNameBtn.addEventListener("click", () => {
+                      nameInput.value = "";
+                      localStorage.removeItem("monitorName");
+                      originalName = "";
+                      nameError.classList.add("hidden");
+                      nameInput.classList.remove("border-red-500");
+                    });
+                  });
+                
+function saveResponsibilitiesToStorage() {
+  const responsibilities = [];
+  document.querySelectorAll("ul.space-y-3 li span").forEach((span) => {
+    responsibilities.push(span.textContent.trim());
+  });
+  localStorage.setItem("responsibilities", JSON.stringify(responsibilities));
+}
+
+function enableResponsibilityEditing(li) {
+  const span = li.querySelector("span");
+  const text = span.textContent.trim();
+  span.classList.add("hidden");
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.className = "w-full text-sm text-gray-700 border-none bg-gray-50 rounded p-2";
+  li.insertBefore(textarea, span);
+
+  const buttonGroup = document.createElement("div");
+  buttonGroup.className = "mt-2 flex justify-end space-x-2";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.textContent = "Save";
+  saveBtn.className = "px-3 py-1 text-sm bg-primary text-white rounded-button hover:bg-blue-600";
+  saveBtn.onclick = () => {
+    const newText = textarea.value.trim();
+    if (newText) {
+      span.textContent = newText;
+      saveResponsibilitiesToStorage();
+    }
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.className = "px-3 py-1 text-sm border border-gray-300 rounded-button hover:bg-gray-50";
+  cancelBtn.onclick = () => {
+    span.classList.remove("hidden");
+    textarea.remove();
+    buttonGroup.remove();
+  };
+
+  buttonGroup.appendChild(saveBtn);
+  buttonGroup.appendChild(cancelBtn);
+  li.appendChild(buttonGroup);
+}
+
+function loadResponsibilitiesFromStorage() {
+  const saved = localStorage.getItem("responsibilities");
+  if (saved) {
+    const ul = document.querySelector("ul.space-y-3");
+    ul.innerHTML = "";
+    JSON.parse(saved).forEach((resp) => {
+      const li = document.createElement("li");
+      li.className = "flex items-start p-2 hover:bg-gray-50 rounded transition-colors group";
+      li.innerHTML = `
+        <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 mr-3">
+          <i class="ri-check-line text-green-500 ri-sm"></i>
+        </div>
+        <span class="text-sm text-gray-700 flex-1">${resp}</span>
+        <button class="delete-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+          <i class="ri-delete-bin-line"></i>
+        </button>
+      `;
+      const editBtn = document.createElement("button");
+      editBtn.className = "edit-responsibility w-6 h-6 flex items-center justify-center text-gray-400 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity";
+      editBtn.innerHTML = '<i class="ri-edit-line"></i>';
+      editBtn.onclick = () => enableResponsibilityEditing(li);
+      li.appendChild(editBtn);
+      ul.appendChild(li);
+    });
+  }
+}
+
+</script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

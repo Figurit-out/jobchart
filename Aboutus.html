@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Class Job Roles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .upload-btn {
+  @apply absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-40 rounded-full cursor-pointer transition text-xs font-semibold text-center;
+  opacity: 1;
+  padding: 0 8px;
+  line-height: 1.1;
+}
+
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <header class="bg-blue-600 text-white py-6 shadow relative">
+  <!-- Back to Home Button -->
+  <div class="absolute left-4 top-6">
+    <a href="index.html" class="flex items-center space-x-2 text-white hover:text-gray-200 transition">
+      <span class="text-2xl">&#8592;</span>
+      <span class="font-medium">Back to Home</span>
+    </a>
+  </div>
+
+  <!-- Page Title -->
+  <div class="container mx-auto text-center">
+    <h1 class="text-4xl font-bold">About Us</h1>
+    <p class="text-lg mt-2">Meet the Team Behind the Class Job Chart</p>
+  </div>
+</header>
+
+
+    <main class="container mx-auto py-12 px-4 space-y-16">
+      <!-- Lead Developer -->
+<section class="text-center">
+  <h2 class="text-3xl font-bold mb-6">Lead Developer</h2>
+  <div class="flex justify-center mb-4">
+    <div class="relative w-40 h-40 rounded-full bg-gray-300 overflow-hidden shadow-md">
+      <img src="Dibas Khadka.jpeg" alt="Dibas Khadka - Lead Developer" class="w-full h-full object-cover rounded-full" />
+    </div>
+  </div>
+  <p class="max-w-xl mx-auto text-gray-600">
+    Hi! I'm Dibas Khadka, the man behind all of this project. I was responsible for the entire coding and getting the website online.
+  </p>
+</section>
+
+      <!-- Assistant Developers -->
+      <section class="text-center">
+        <h2 class="text-3xl font-bold mb-6">Assistant Developers</h2>
+        <div class="flex flex-wrap justify-center gap-8 mb-4">
+          <!-- Assistant 1 -->
+          <div class="image-upload-container w-32 h-32 rounded-full bg-gray-300 overflow-hidden shadow-md">
+            <label class="upload-btn" for="assistant1Input">No photo given.</label>
+            <img id="assistant1Img" class="w-full h-full object-cover img-preview rounded-full" />
+            <input type="file" id="assistant1Input" accept="image/*" class="hidden" onchange="previewImage(this, 'assistant1Img')" />
+          </div>
+          <!-- Assistant 2 -->
+          <div class="image-upload-container w-32 h-32 rounded-full bg-gray-300 overflow-hidden shadow-md">
+            <label class="upload-btn" for="assistant2Input">No photo given.</label>
+            <img id="assistant2Img" class="w-full h-full object-cover img-preview rounded-full" />
+            <input type="file" id="assistant2Input" accept="image/*" class="hidden" onchange="previewImage(this, 'assistant2Img')" />
+          </div>
+        </div>
+        <p class="max-w-xl mx-auto text-gray-600">
+          We are Sankalpa Neupane and Abin Man Singh we were the assistant developers for the website. We were responsible for the polishing, debugging and improving the user experience.
+        </p>
+      </section>
+
+      <!-- Designers -->
+      <section class="text-center">
+        <h2 class="text-3xl font-bold mb-6">Designers</h2>
+        <div class="flex flex-wrap justify-center gap-6 mb-4">
+          <!-- Designer 1 -->
+          <div class="image-upload-container w-28 h-28 rounded-full bg-gray-300 overflow-hidden shadow-md">
+            <label class="upload-btn" for="designer1Input">No photo given.</label>
+            <img id="designer1Img" class="w-full h-full object-cover img-preview rounded-full" />
+            <input type="file" id="designer1Input" accept="image/*" class="hidden" onchange="previewImage(this, 'designer1Img')" />
+          </div>
+          <!-- Designer 2 -->
+          <div class="image-upload-container w-28 h-28 rounded-full bg-gray-300 overflow-hidden shadow-md">
+            <label class="upload-btn" for="designer2Input">No photo given.</label>
+            <img id="designer2Img" class="w-full h-full object-cover img-preview rounded-full" />
+            <input type="file" id="designer2Input" accept="image/*" class="hidden" onchange="previewImage(this, 'designer2Img')" />
+          </div>
+          <!-- Designer 3 -->
+          <div class="image-upload-container w-28 h-28 rounded-full bg-gray-300 overflow-hidden shadow-md">
+            <label class="upload-btn" for="designer3Input">No photo given.</label>
+            <img id="designer3Img" class="w-full h-full object-cover img-preview rounded-full" />
+            <input type="file" id="designer3Input" accept="image/*" class="hidden" onchange="previewImage(this, 'designer3Img')" />
+          </div>
+        </div>
+        <p class="max-w-xl mx-auto text-gray-600">
+          We are Siddartha Basnet, Rudraksh Devkota and Rujal Ojha. We were the ones responsible for the rough sketch and giving ideas for the website. One quality about us is that we were too lazy to send a photo for the lead developer to add in the website.
+        </p>
+      </section>
+    </main>
+
+    <footer class="bg-gray-100 text-center py-6 text-sm text-gray-500">
+      &copy; 2025 Class JobChart. All rights reserved.
+    </footer>
+
+    <script>
+      function previewImage(input, imgId) {
+        const file = input.files[0];
+        const preview = document.getElementById(imgId);
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            preview.src = reader.result;
+            preview.style.display = "block";
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    </script>
+  </body>
+</html>
